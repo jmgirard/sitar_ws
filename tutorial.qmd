@@ -4,7 +4,7 @@ format:
     css: styles.css
     slide-number: true
     show-slide-number: all
-    preview-links: auto
+    preview-links: true
     self-contained: true
     progress: true
     history: true
@@ -14,7 +14,7 @@ format:
     highlight-style: zenburn
     code-link: false
     code-copy: true
-    pagetitle: "Circumplex Tutorial"
+    pagetitle: "Circumplex Workshop"
     author-meta: "Jeffrey Girard"
     date-meta: "2022-07-25"
 ---
@@ -28,6 +28,11 @@ format:
 :::
 
 ![](programmer_357EDD.svg){.absolute bottom=0 right=0 width=400}
+
+::: footer
+[Follow along at <https://jmgirard.github.io/sitar_ws>]{.my-grey}
+:::
+
 :::
 
 # Overview
@@ -280,30 +285,6 @@ Introduction to R
 10 / 3 # correct
 
 10 \ 3 # error
-
-# ==============================================================================
-
-# Parentheses and Exponents
-
-10 + 3 * 2
-
-(10 + 3) * 2
-
-10 ^ 2
-
-10 ^ (1 / 2)
-
-# ==============================================================================
-
-# Negative and Large Numbers
-
-10 + -30
-
-9876543 # correct
-
-9,876,543 # error
-
-9 876 543 # error
 ```
 
 ::: footer
@@ -364,6 +345,8 @@ x * 4
 
 2 * 4
 
+(x * x) - (10 + x)
+
 # ==============================================================================
 
 # LESSON: You must use assignment to update an object
@@ -371,7 +354,6 @@ x * 4
 x
 
 x + 1
-
 x # still 2
 
 x <- x + 1
@@ -379,22 +361,15 @@ x # updated to 3
 
 # ==============================================================================
 
-# USECASE: We can use the same object multiple times in a line
+# LESSON: R is case sensitive
 
-(10 + x - 1) / x
+q <- 10
+q
 
-# ==============================================================================
+Q <- 20
+Q
 
-# USECASE: We can also use an object to create another object
-
-y <- 10 + x
-y
-
-# ==============================================================================
-
-# USECASE: We can also use multiple objects in a line
-
-y / x
+q # still 10
 ```
 
 ::: footer
@@ -445,7 +420,7 @@ rate <- 93 # too short
 
 heart_rate_in_beats_per_minute <- 93 # too long
 
-heart_rate_bpm <- 93 # just right
+heart_rate <- 93 # just right
 
 # ==============================================================================
 
@@ -472,18 +447,6 @@ heart_rate_1 <- 93 # correct
 1_heart_rate <- 93 # error
 
 _heart_rate <- 93 # error
-
-# ==============================================================================
-
-# LESSON: Object names are case-sensitive
-
-heart_rate <- 93
-
-Heart_rate <- 88
-
-heart_rate # still 93
-
-Heart_rate # a new object
 ```
 
 ::: footer
@@ -570,6 +533,99 @@ round(2 / 3, digits = 3)
 round(2 / 3) # the default value for digits is 0
 
 round(2 / 3, digits = 0)
+```
+
+::: footer
+Introduction to R
+:::
+
+## Vectors {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   [Vectors]{.b .blue} combine similar objects into a collection
+    -   *I like to imagine a train pulling multiple cars*<br />
+    ![](traincar.png)
+    -   A vector is one object with many sub-objects
+    -   We refer to each sub-object as an [element]{.b .green}
+
+::: {.fragment .mt1}
+-   Some functions [transform each element]{.b .green} in turn
+    -   *Double the amount of cargo in every train car*
+:::
+
+::: {.fragment .mt1}
+-   Some functions [summarize across elements]{.b .green}
+    -   *Calculate the total cargo across all train cars*
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li bqmoqptv trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+
+::: {.fragment}
+`v <- c(1, 2, 3)`
+:::
+
+:::
+:::
+
+::: footer
+\[1B\] Program II
+:::
+
+## Vectors Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# LESSON: We can combine multiple elements into a vector
+
+# TEMPLATE: vector_name <- c(element1, element2, element3)
+
+x <- 4 9 16 25 # error
+
+x <- c(4, 9, 16, 25)
+x
+
+y <- c(2, 3)
+y
+
+# ==============================================================================
+
+# LESSON: We can also combine multiple vectors and elements
+
+z <- c(x, y)
+z
+
+# ==============================================================================
+
+# USECASE: Math operators will transform each element individually
+
+x + 1
+
+x * 3
+
+# ==============================================================================
+
+# USECASE: Some functions will also transform each element individually
+
+sqrt(x)
+
+log(x)
+
+# ==============================================================================
+
+# USECASE: Other functions will summarize the vector with a single number
+
+length(x)
+
+sum(x)
+
+mean(x)
 ```
 
 ::: footer
@@ -805,5 +861,503 @@ write_csv(my_data, file = "jz2017b.csv")
 Introduction to R
 :::
 
-# Introduction to \{circumplex\}
+# \{circumplex\}
 
+## Package Website
+
+![](circumplex.png){.ba}
+
+<https://circumplex.jmgirard.com>
+
+::: footer
+\{circumplex\} package
+:::
+
+## Package Overview
+
+::: {.pv4}
+![](functions.png)
+:::
+
+::: footer
+\{circumplex\} package
+:::
+
+## Instrument Functions {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   The package contains information about numerous [circumplex instruments]{.b .blue} (i.e., questionnaires)
+
+::: {.fragment .mt1}
+-   You can [browse and learn]{.b .green} about instruments
+    -   Who created it? What paper should I cite?
+    -   What are the response options and anchors?
+    -   What are the items' numbers and text?
+    -   How do I score each scale from the items?
+    -   What normative data sets are available?
+:::
+
+::: {.fragment .mt1}
+-   You can automatically [score your item-level data]{.b .green}
+:::
+
+::: {.fragment .mt1}
+-   You can automatically [norm your scale-level data]{.b .green}
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li tgriojic trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\{circumplex\} package
+:::
+
+## Instruments Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: Load the circumplex package for use
+
+library(circumplex)
+
+# ==============================================================================
+
+# USECASE: List all available instruments
+
+instruments()
+
+# ==============================================================================
+
+# USECASE: Display general information about an instrument
+
+print(csip) # brief
+
+summary(csip) # detailed
+
+# ==============================================================================
+
+# USECASE: Display specific information about an instrument
+
+items(ipipipc)
+
+scales(ipipipc)
+
+scales(ipipipc, items = TRUE)
+
+anchors(ipipipc)
+
+norms(ipipipc)
+
+# ==============================================================================
+
+# USECASE: Automatically score an instrument from item-level data
+
+raw_iipsc
+
+raw_scores <- score(raw_iipsc, items = IIP01:IIP32, instrument = iipsc)
+raw_scores
+
+# ==============================================================================
+
+# USECASE: Automatically standardize an instrument from stored norms
+
+norms(iipsc)
+
+z_scores <- standardize(raw_scores, scales = PA:NO, angles = octants(),
+                        instrument = iipsc, sample = 1)
+z_scores
+```
+
+::: footer
+\{circumplex\} package
+:::
+
+## Basic SSM Analysis {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   The package performs [basic SSM analyses]{.b .blue}
+
+::: {.fragment .mt1}
+-   The Structural Summary Method (SSM)
+    -   Summarizes cicumplex (e.g., octant) scores
+    -   Reduces eight numbers down to just three
+    -   Each number has a distinct interpretation
+    -   Allows plotting in a circular space
+:::
+
+::: {.fragment .mt1}
+-   Uncertainty and inference through resampling
+    -   e.g., bootstrapping or MCMC
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li ffqgzgcy trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\{circumplex\} package
+:::
+
+<!-- ## Example Usecase {.smaller} -->
+
+<!-- ::: {.columns .pv4} -->
+<!-- ::: {.column width="50%"} -->
+<!-- **Example Data** -->
+
+<!--   -   Zimmerman \& Wright (2017) -->
+<!--   -   Undergraduate sample $(n=1166)$ -->
+<!--   -   IIP-SC (interpersonal problems) -->
+<!--   -   PDQ-4 (personality pathology) -->
+
+<!-- **Research Questions** -->
+
+<!--   -   What was the interpersonal profile of the entire sample? Of men? Of women? -->
+<!--   -   What profile parameters were associated with the NARPD and ASPD scales? -->
+<!--   -   Did profile parameters differ between men and women or between NARPD and ASPD? -->
+<!-- ::: -->
+<!-- ::: {.column width="50%" .pv5} -->
+<!-- ![](iip.png) -->
+<!-- ::: -->
+<!-- ::: -->
+
+<!-- ::: footer -->
+<!-- \{circumplex\} package -->
+<!-- ::: -->
+
+<!-- ## Example Usecase -->
+
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- #| message: false -->
+
+<!-- library(tidyverse) -->
+<!-- library(circumplex) -->
+
+<!-- data("jz2017") -->
+<!-- rmat <- jz2017 %>%  -->
+<!--   dplyr::select(NARPD, PA:NO) %>%  -->
+<!--   cor(method = "pearson") -->
+<!-- r <- rmat[2:9, 1] -->
+<!-- # Format data for plotting -->
+<!-- dat_r <- tibble::tibble( -->
+<!--   Scale = factor(c("PA", "BC", "DE", "FG", "HI", "JK", "LM", "NO")), -->
+<!--   r = r -->
+<!-- ) -->
+<!-- # Create column plot -->
+<!-- ggplot2::ggplot(dat_r, ggplot2::aes(x = Scale, y = r)) + -->
+<!--   ggplot2::geom_hline(yintercept = 0, size = 1.25, color = "darkgray") + -->
+<!--   ggplot2::geom_col(position = ggplot2::position_dodge(.9), fill = "#d95f02") + -->
+<!--   ggplot2::labs(title = "Scores") + -->
+<!--   coord_cartesian(ylim = c(0, 0.5)) + -->
+<!--   theme_grey(base_size = 20) + -->
+<!--   ggplot2::theme( -->
+<!--     axis.title = ggplot2::element_blank(), -->
+<!--     panel.grid.major.y = ggplot2::element_line(size = 1.0), -->
+<!--     panel.grid.major.x = ggplot2::element_blank(), -->
+<!--     panel.grid.minor = ggplot2::element_blank() -->
+<!--   ) -->
+<!-- ``` -->
+
+<!-- ## An Applied Example -->
+
+<!-- ```{r} -->
+<!-- dat_r <- tibble::tibble( -->
+<!--   Scale = factor( -->
+<!--     c("LM", "PA", "BC", "DE", "FG", "HI", "JK", "LM", "NO"), -->
+<!--     levels = c("PA", "BC", "DE", "FG", "HI", "JK", "LM", "NO") -->
+<!--   ), -->
+<!--   est = r[c(7, 1:8)], -->
+<!--   Angle = c(0, octants()) -->
+<!-- ) %>%  -->
+<!--   dplyr::arrange(Angle) -->
+<!-- # Plot correlations as connected point ranges with 95% CI ranges -->
+<!-- ggplot2::ggplot(dat_r, ggplot2::aes(x = Angle, y = est)) + -->
+<!--   ggplot2::geom_hline(yintercept = 0, size = 1.25, color = "darkgray") + -->
+<!--   ggplot2::geom_point(size = 3, color = "#d95f02") + -->
+<!--   ggplot2::geom_path(size = 1.25, color = "#d95f02") + -->
+<!--   ggplot2::geom_label(aes(label = Scale), nudge_y = 0.075, size = 5) + -->
+<!--   ggplot2::scale_x_continuous( -->
+<!--     breaks = c(0, octants()), -->
+<!--     labels = function(x) sprintf("%.0f\U00B0", x) -->
+<!--   ) + -->
+<!--   coord_cartesian(xlim = c(0, 360), ylim = c(0, 0.5)) + -->
+<!--   ggplot2::labs(title = "Scores by Angle") + -->
+<!--   theme_grey(base_size = 20) + -->
+<!--   ggplot2::theme( -->
+<!--     axis.title = ggplot2::element_blank(), -->
+<!--     panel.grid.major.y = ggplot2::element_line(size = 1.0), -->
+<!--     panel.grid.major.x = ggplot2::element_blank(), -->
+<!--     panel.grid.minor = ggplot2::element_blank() -->
+<!--   ) -->
+<!-- ``` -->
+
+<!-- ## An Applied Example -->
+
+<!-- ```{r} -->
+<!-- # Calculate SSM parameters -->
+<!-- sp <- ssm_parameters(r, octants()) -->
+<!-- # Create function for SSM cosine model -->
+<!-- f <- function(x) { -->
+<!--   sp$Elev + sp$Ampl * cos((x - sp$Disp) * pi / 180) -->
+<!-- } -->
+<!-- # Plot correlations along with SSM cosine model -->
+<!-- ggplot2::ggplot(dat_r, ggplot2::aes(x = Angle, y = est)) + -->
+<!--   ggplot2::geom_hline(yintercept = 0, size = 1.25, color = "darkgray") + -->
+<!--   ggplot2::geom_point(size = 3) + -->
+<!--   ggplot2::geom_path(size = 1.25) + -->
+<!--   ggplot2::stat_function(fun = f, size = 2, color = "#d95f02") + -->
+<!--   ggplot2::scale_x_continuous( -->
+<!--     breaks = c(0, octants()), -->
+<!--     labels = function(x) sprintf("%.0f\U00B0", x) -->
+<!--   ) + -->
+<!--   coord_cartesian(xlim = c(0, 360), ylim = c(0, 0.5)) + -->
+<!--   ggplot2::labs(title = "Cosine Curve Estimated by SSM") + -->
+<!--   theme_grey(base_size = 20) + -->
+<!--   ggplot2::theme( -->
+<!--     axis.title = ggplot2::element_blank(), -->
+<!--     panel.grid.major.y = ggplot2::element_line(size = 1.0), -->
+<!--     panel.grid.major.x = ggplot2::element_blank(), -->
+<!--     panel.grid.minor = ggplot2::element_blank() -->
+<!--   ) -->
+<!-- ``` -->
+
+<!-- ## An Applied Example -->
+
+<!-- ::: {.pv4}  -->
+<!-- **Structural Summary Parameters** -->
+
+<!-- -   Model Fit $(R^2)$: Interpreted as interpersonal [prototypicality]{.b .blue} -->
+<!-- -   Elevation $(e)$: Interpreted as the [general factor]{.b .blue} or mean score -->
+<!-- -   Amplitude $(a)$: Interpreted as [distinctiveness]{.b .blue} or differentiation -->
+<!-- -   Displacement $(d)$: Interpreted as interpersonal [style]{.b .blue} -->
+<!-- ::: -->
+
+<!-- ## An Applied Example -->
+
+<!-- ```{r} -->
+<!-- ggplot2::ggplot(dat_r, ggplot2::aes(x = Angle, y = est)) + -->
+<!--   ggplot2::geom_hline(yintercept = 0, size = 1.25, color = "darkgray") + -->
+<!--   ggplot2::stat_function(fun = f, size = 2, color = "gray20") + -->
+<!--   ggplot2::geom_point(size = 5.5, color = "black") + -->
+<!--   ggplot2::geom_path(size = 1.25, color = "black") + -->
+<!--   ggplot2::geom_segment( -->
+<!--     ggplot2::aes(x = Angle, xend = Angle, y = est, yend = f(Angle)), -->
+<!--     size = 4, linetype = "solid", color = "#d95f02" -->
+<!--   ) + -->
+<!--   ggplot2::scale_x_continuous( -->
+<!--     breaks = c(0, octants()), -->
+<!--     labels = function(x) sprintf("%.0f\U00B0", x) -->
+<!--   ) + -->
+<!--   coord_cartesian(xlim = c(0, 360), ylim = c(0, 0.5)) + -->
+<!--   ggplot2::labs(title = sprintf("Fit = %.2f", sp[[6]])) + -->
+<!--   theme_grey(base_size = 20) + -->
+<!--   ggplot2::theme( -->
+<!--     axis.title = ggplot2::element_blank(), -->
+<!--     panel.grid.major.y = ggplot2::element_line(size = 1.0), -->
+<!--     panel.grid.major.x = ggplot2::element_blank(), -->
+<!--     panel.grid.minor = ggplot2::element_blank() -->
+<!--   ) -->
+<!-- ``` -->
+
+
+## Basic SSM Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+jz2017
+
+# ==============================================================================
+
+# Calculate the overall sample's mean IIP-SC profile
+
+overall_ssm <- ssm_analyze(
+  .data = jz2017,
+  scales = c(PA, BC, DE, FG, HI, JK, LM, NO),
+  angles = c(90, 135, 180, 225, 270, 315, 360, 45),
+)
+summary(overall_ssm)
+
+ssm_table(overall_ssm)
+
+ssm_plot(overall_ssm)
+
+# ==============================================================================
+
+# Some shortcuts if your scales are already in order from PA to NO
+
+overall_ssm <- ssm_analyze(
+  .data = jz2017,
+  scales = PA:NO,
+  angles = octants()
+)
+summary(overall_ssm)
+
+# ==============================================================================
+
+# Project the NARPD measure into the IIP-SC circumplex space
+
+narpd_ssm <- ssm_analyze(
+  .data = jz2017,
+  scales = PA:NO,
+  angles = octants(),
+  measures = NARPD
+)
+
+summary(narpd_ssm)
+
+ssm_table(narpd_ssm)
+
+ssm_plot(narpd_ssm)
+```
+
+::: footer
+\{circumplex\} package
+:::
+
+## Intermediate SSM Analysis {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   The package performs [intermediate SSM analyses]{.b .blue}
+
+::: {.fragment .mt1}
+-   Estimate SSM parameters for [multiple groups]{.b .green} and/or [multiple measures]{.b .green} simultaneously
+    -   Easier syntax for the analyst
+    -   Uses the same resamples
+    -   Populates the same tables/figures
+:::
+
+::: {.fragment .mt1}
+-   [Statistically contrast]{.b .green} groups and/or measures
+    -   Compare each pair of groups/measures
+    -   Infer whether each parameter differs
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li ffqgzgcy trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\{circumplex\} package
+:::
+
+## Intermediate SSM Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+jz2017
+
+# ==============================================================================
+
+# Calculate each gender group's mean IIP-SC profile
+
+gender_ssm <- ssm_analyze(
+  .data = jz2017,
+  scales = PA:NO,
+  angles = octants(),
+  grouping = Gender
+)
+summary(gender_ssm)
+
+ssm_table(gender_ssm)
+
+ssm_plot(gender_ssm)
+
+# ==============================================================================
+
+# Statistically contrast the two gender groups' SSM parameters
+
+gender_contrast <- ssm_analyze(
+  .data = jz2017,
+  scales = PA:NO,
+  angles = octants(),
+  grouping = Gender,
+  contrast = "test"
+)
+summary(gender_contrast)
+
+ssm_table(gender_contrast)
+
+ssm_plot(gender_contrast)
+
+# ==============================================================================
+
+# Project the NARPD and ASPD measures into the IIP-SC circumplex space
+
+pds_ssm <- ssm_analyze(
+  .data = jz2017,
+  scales = PA:NO,
+  angles = octants(),
+  measures = c(NARPD, ASPD)
+)
+
+summary(pds_ssm)
+
+ssm_table(pds_ssm)
+
+ssm_plot(pds_ssm)
+
+# ==============================================================================
+
+# Statistically contrast the NARPD and ASPD measures' SSM parameters
+
+pds_contrast <- ssm_analyze(
+  .data = jz2017,
+  scales = PA:NO,
+  angles = octants(),
+  measures = c(NARPD, ASPD),
+  contrast = "test"
+)
+
+summary(pds_contrast)
+
+ssm_table(pds_contrast)
+
+ssm_plot(pds_contrast)
+```
+
+::: footer
+\{circumplex\} package
+:::
+
+## Horizons
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   SSM extensions (from SITAR 2021)
+-   Circumplex fit analyses
+-   Circumplex reliability analyses
+-   Functions for scoring EMA data
+-   Functions for tidying joystick data
+-   A rewritten, web-based DARMA
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li nmlpnruz trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\{circumplex\} package
+:::
